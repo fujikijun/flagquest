@@ -8,6 +8,20 @@ class Player
 {
   constructor()
   {    
+    // マスクプレートの使用回数
+    this.log_iUseMaskCount = 0;
+    // ワープの回数
+    this.log_iWarpCount = 0;
+    // マスクプレートの総利用時間
+    this.log_iUseMaskTotalTime = 0;
+    // マスクプレートの利用開始時間
+    this.log_iUseMaskStartTime = 0;
+    // 移動距離
+    this.move_length = 0;
+    // マスクプレート初回か
+    this.used_mask = false;
+    this.log_iUseMaskFirstTime = 0;
+
     this.x = 0;
     this.y = 0;
     this.direction = 0;
@@ -114,6 +128,14 @@ class Player
     this.screen_area_y1 = int( this.shift_y - (this.sizeY / 2 - 0 ) * BASE_MAPTIP_SIZE );
     this.screen_area_x2 = int( this.shift_x + (this.sizeX / 2 - 0 ) * BASE_MAPTIP_SIZE )-BASE_MAPTIP_SIZE;
     this.screen_area_y2 = int( this.shift_y + (this.sizeY / 2 - 0 ) * BASE_MAPTIP_SIZE );
+
+    this.log_iWarpCount = 0;
+    this.log_iUseMaskStartTime = 0;
+    this.log_iUseMaskTotalTime = 0;
+    this.log_iUseMaskCount = 0;
+    this.move_length = 0;
+    this.used_mask = false;
+    this.log_iUseMaskFirstTime = 0;
   }
 
   //----------------------------------------------------------------------------------------
@@ -174,9 +196,16 @@ class Player
           //if ( screen_y > screen_area_y1 )
           this.state = 4;
         }
+        
         if ( keyIsPressed && keyCode === SHIFT )
         {
+          /*
+          //--------------------------------------------
+          log.WriteFish();
+          //--------------------------------------------
           reset();
+          //window.close();
+          */
         }
       }
 
@@ -249,6 +278,10 @@ class Player
           if ( this.x%BASE_MAPTIP_SIZE == 0 )
           {
             this.state = 0;
+            //--------------------------------------------
+            log.WriteEvent( 1 );
+            this.move_length++;
+            //--------------------------------------------
           }
         }
         break;
@@ -259,6 +292,10 @@ class Player
           if ( this.x%BASE_MAPTIP_SIZE == 0 )
           {
             this.state = 0;
+            //--------------------------------------------
+            log.WriteEvent( 1 );
+            this.move_length++;
+            //--------------------------------------------
           }
         }
         break;
@@ -269,6 +306,10 @@ class Player
           if ( this.y%BASE_MAPTIP_SIZE == 0 )
           {
             this.state = 0;
+            //--------------------------------------------
+            log.WriteEvent( 1 );
+            this.move_length++;
+            //--------------------------------------------
           }
         }
         break;
@@ -279,6 +320,10 @@ class Player
           if ( this.y%BASE_MAPTIP_SIZE == 0 )
           {
             this.state = 0;
+            //--------------------------------------------
+            log.WriteEvent( 1 );
+            this.move_length++;
+            //--------------------------------------------
           }
         }
         break;
@@ -296,9 +341,18 @@ class Player
             this.state = 0;
             if ( this.shift_x >= this.screen_area_x2 )
             {
+              //--------------------------------------------
+              this.log_iWarpCount++;
+              log.WriteEvent( 2 );
+              //--------------------------------------------
+
               this.shift_x -= (this.screen_area_x2-this.screen_area_x1);
               this.x -= (this.screen_area_x2-this.screen_area_x1);
             }
+            //--------------------------------------------
+            log.WriteEvent( 1 );
+            this.move_length++;
+            //--------------------------------------------
           }
         }
         break;
@@ -312,9 +366,18 @@ class Player
             this.state = 0;
             if ( this.shift_x <= this.screen_area_x1-BASE_MAPTIP_SIZE )
             {
+              //--------------------------------------------
+              this.log_iWarpCount++;
+              log.WriteEvent( 2 );
+              //--------------------------------------------
+
               this.shift_x += (this.screen_area_x2-this.screen_area_x1);
               this.x += (this.screen_area_x2-this.screen_area_x1);
             }
+            //--------------------------------------------
+            log.WriteEvent( 1 );
+            this.move_length++;
+            //--------------------------------------------
           }
         }
         break;
@@ -328,9 +391,18 @@ class Player
             this.state = 0;
             if ( this.shift_y >= this.screen_area_y2 )
             {
+              //--------------------------------------------
+              this.log_iWarpCount++;
+              log.WriteEvent( 2 );
+              //--------------------------------------------
+
               this.shift_y -= (this.screen_area_y2-this.screen_area_y1);
               this.y -= (this.screen_area_y2-this.screen_area_y1);
             }
+            //--------------------------------------------
+            log.WriteEvent( 1 );
+            this.move_length++;
+            //--------------------------------------------
           }
         }
         break;
@@ -344,9 +416,18 @@ class Player
             this.state = 0;
             if ( this.shift_y <= this.screen_area_y1-BASE_MAPTIP_SIZE )
             {
+              //--------------------------------------------
+              this.log_iWarpCount++;
+              log.WriteEvent( 2 );
+              //--------------------------------------------
+
               this.shift_y += (this.screen_area_y2-this.screen_area_y1);
               this.y += (this.screen_area_y2-this.screen_area_y1);
             }
+            //--------------------------------------------
+            log.WriteEvent( 1 );
+            this.move_length++;
+            //--------------------------------------------
           }
         }
         break;
@@ -365,16 +446,22 @@ class Player
           if ( this.flag == g_map.vecGoal.length )
           {
             SCENE_STATE = STATE_GOAL;
-              
-             g_soundBGM.stop();
-             g_soundGoal.play();
-             
+            //--------------------------------------------
+            log.WriteFish();
+            //--------------------------------------------
+            //--------------------------------------------
+            log.WriteEvent( 6 );
+            //--------------------------------------------
+
+            g_soundBGM.stop();
+            g_soundGoal.play();
           } else
           {
             this.flag_timer = FLAG_SHOW_TIME;
-                
-             g_soundGet.play();
-             
+            //--------------------------------------------
+            log.WriteEvent( 5 );
+            //--------------------------------------------
+            g_soundGet.play();
           }
         }
       }
@@ -482,23 +569,21 @@ class Player
     let c1 = int( this.play_time / 100 );
     let c2 = int( ( this.play_time - c1*100 ) / 10 );
     let c3 = int( this.play_time - c1*100 - c2*10 );
-    
+
     for ( let i=0; i<3; i++ )
     {
       let c;
-      if( i == 0 )
+      if ( i == 0 )
       {
         c = c1;
-      }
-      else if( i == 1 )
+      } else if ( i == 1 )
       {
         c = c2;
-      }
-      else
+      } else
       {
         c = c3;
       }
-      
+
       switch( c )
       {
       case 0:
@@ -538,6 +623,9 @@ class Player
     if ( this.play_time < 0 )
     {
       SCENE_STATE = STATE_OVER;
+      //--------------------------------------------
+      log.WriteFish();
+      //--------------------------------------------
     }
   }
 }

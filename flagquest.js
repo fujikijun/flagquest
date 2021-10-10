@@ -61,6 +61,23 @@ let mask_base_x = 0;
 let mask_base_y = 0;
 let mouseOn = false;
 
+let log;
+let imgOutputLog;
+
+function beforeUnload(event)
+{
+  /*
+  //--------------------------------------------
+  log.WriteFish();
+  //--------------------------------------------
+  event.preventDefault();
+  event.returnValue = 'Check';
+  */
+}
+
+window.onbeforeunload = beforeUnload;
+
+
 //-------------------------------------------------------------------------
 // preload
 //-------------------------------------------------------------------------
@@ -110,6 +127,7 @@ function preload()
   }
 
   imgCursor = loadImage( "data/cursor.png" );
+  imgOutputLog = loadImage( "data/outputlog.png" );
 }
 
 //------------------------------------------------------------------------------------------
@@ -190,6 +208,8 @@ function setup()
   messages[5].loop = true;
   messages[5].message_speed = TITLE_SPEED;
   //g_player.init();
+
+  log = new Log();
 }
 
 //-------------------------------------------------------------------------
@@ -239,6 +259,11 @@ function draw()
   }
 
   //image( imgCursor, mouseX, mouseY );
+  push();
+  translate( 8, 8 );
+  scale( 2, 2 );
+  image( imgOutputLog, 0, 0 );
+  pop();
 }
 
 //-------------------------------------------------------------------------
@@ -406,6 +431,28 @@ function changeMask( index, type, upside )
     break;
   }
 
+  if ( ( FILED_STATE!=0 && old_field_state!=FILED_STATE ) || (old_field_mask!=CURRENT_MASK) || (old_field_upside!=CURRENT_MASK_UPSIDE) )
+  {
+    g_player.log_iUseMaskCount++;
+    g_player.log_iUseMaskStartTime = millis() - log.m_iStartTime;
+    //--------------------------------------------
+    log.WriteEvent( 3 );
+
+    if ( !g_player.used_mask )
+    {
+      g_player.used_mask = true;
+      g_player.log_iUseMaskFirstTime = g_player.log_iUseMaskStartTime;
+    }
+    //--------------------------------------------
+  }
+  if ( FILED_STATE==0 && old_field_state!=FILED_STATE )
+  {
+    let t = millis() - g_player.log_iUseMaskStartTime;
+    g_player.log_iUseMaskTotalTime += t;
+    //--------------------------------------------
+    log.WriteEvent( 4 );
+    //--------------------------------------------
+  }
   //console.log(g_player.screen_area_x1,g_player.screen_area_y1,g_player.screen_area_x2,g_player.screen_area_y2);
 }
 
@@ -428,8 +475,13 @@ function mousePressed()
       break;
     }
   }
-  
+
   mouseOn = true;
+  
+  if( mouseX>8 && mouseY>8 && mouseX<8+16*2 && mouseY<8+16*2 )
+  {
+    log.WriteFish();
+  }
 }
 
 function mouseDragged()
@@ -468,6 +520,6 @@ function mouseReleased()
     currentMask.on = false;
   }
   currentMask = null;
-  
+
   mouseOn = false;
 }

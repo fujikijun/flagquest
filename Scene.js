@@ -37,6 +37,10 @@ function SceneTitle()
       g_soundBGM.loop();
       start_timer = 0;
       SCENE_STATE = STATE_START;
+
+      //--------------------------------------------
+      log.Restart();
+      //--------------------------------------------
     }
   }
 }
@@ -288,7 +292,7 @@ function SceneScore()
 function SceneOver()
 {
   g_soundBGM.stop();
-  
+
   background( 0 );
   let r1 = float(windowWidth)/float(BASE_DISPLAY_WIDTH);
   let r2 = float(windowHeight)/float(BASE_DISPLAY_HEIGHT);
