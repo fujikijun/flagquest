@@ -316,7 +316,7 @@ class Mask
       }
     }
 
-    if ( mousex>this.x+BASE_MAPTIP_SIZE+BASE_MAPTIP_SIZE/2 && mousey>this.y-BASE_MAPTIP_SIZE*2 && mousex<this.x+BASE_MAPTIP_SIZE*2+BASE_MAPTIP_SIZE+BASE_MAPTIP_SIZE/2 && mousey<this.y-BASE_MAPTIP_SIZE*2+BASE_MAPTIP_SIZE ) 
+    if ( mousex>this.x+BASE_MAPTIP_SIZE*2+BASE_MAPTIP_SIZE/2 && mousey>this.y-BASE_MAPTIP_SIZE*2 && mousex<this.x+BASE_MAPTIP_SIZE*2+BASE_MAPTIP_SIZE+BASE_MAPTIP_SIZE/2 && mousey<this.y-BASE_MAPTIP_SIZE*2+BASE_MAPTIP_SIZE ) 
     {
       this.upside++;
       if ( this.upside >= 2 )
