@@ -472,7 +472,7 @@ class Player
     if ( this.play_time_speed > 60 )
     {
       this.play_time_speed = 0;
-      this.play_time--;
+      //this.play_time--;
     }
   }
 
