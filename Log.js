@@ -85,7 +85,7 @@ class Log
       this.strLogTotal += "マスクプレートを取り付けた回数,"; 
       this.strLogTotal += "総ワープ回数,"; 
       this.strLogTotal += "マスクプレートを取り付けていた総時間,"; 
-      this.strLogTotal += "初めてマスクプレートを取り付けた時刻,"; 
+      this.strLogTotal += "初めてマスクプレートを取り付けた時刻,,"; 
 
       for ( let i=0; i<g_map.vecGoal.length; i++ )
       {
@@ -216,6 +216,7 @@ class Log
       this.strLogTotal += ( g_player.log_iUseMaskFirstTime ); 
       this.strLogTotal += ",";  
       //this.strLogTotal += ","; 
+      this.strLogTotal += ",";  
 
       for ( let i=0; i<g_map.vecGoal.length; i++ )
       {
