@@ -89,11 +89,11 @@ class Log
 
       for ( let i=0; i<g_map.vecGoal.length; i++ )
       {
-        this.strLogTotal += "" +(i+0)+ " フラッグ取得時刻,"; 
-        this.strLogTotal += "" +(i+0)+ " フラッグ取得時のマスクプレート利用回数,"; 
-        this.strLogTotal += "" +(i+0)+ " フラッグ取得時までの時間,"; 
-        this.strLogTotal += "" +(i+0)+ " フラッグ取得時までの総移動距離,"; 
-        this.strLogTotal += "" +(i+0)+ " フラッグ取得時までのワープ回数,,";
+        this.strLogTotal += "" +(i+1)+ " フラッグ取得時刻,"; 
+        this.strLogTotal += "" +(i+1)+ " フラッグ取得時のマスクプレート利用回数,"; 
+        this.strLogTotal += "" +(i+1)+ " フラッグ取得時までの時間,"; 
+        this.strLogTotal += "" +(i+1)+ " フラッグ取得時までの総移動距離,"; 
+        this.strLogTotal += "" +(i+1)+ " フラッグ取得時までのワープ回数,,";
       }
     }
 
@@ -212,10 +212,10 @@ class Log
       this.strLogTotal += ",";   
       this.strLogTotal += ( g_player.log_iUseMaskTotalTime ); 
       this.strLogTotal += ",";  
-      this.strLogTotal += ",";   
+      //this.strLogTotal += ",";   
       this.strLogTotal += ( g_player.log_iUseMaskFirstTime ); 
       this.strLogTotal += ",";  
-      this.strLogTotal += ","; 
+      //this.strLogTotal += ","; 
 
       for ( let i=0; i<g_map.vecGoal.length; i++ )
       {
@@ -254,7 +254,7 @@ class Log
     this.output();
 
     this.strLogHeader = "";
-    //this.strLogTotal = "";
+    this.strLogTotal = "\n";
     this.strLogBody = "";
   }
 
