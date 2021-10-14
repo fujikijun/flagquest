@@ -86,11 +86,13 @@ class Log
       this.strLogTotal += "総ワープ回数,"; 
       this.strLogTotal += "マスクプレートを取り付けていた総時間,"; 
       this.strLogTotal += "初めてマスクプレートを取り付けた時刻,"; 
+      /*
       this.strLogTotal += "フラッグ取得時刻,"; 
       this.strLogTotal += "フラッグ取得時のマスクプレート利用回数,"; 
       this.strLogTotal += "フラッグ取得時までの時間,"; 
       this.strLogTotal += "フラッグ取得時までの総移動距離,"; 
       this.strLogTotal += "フラッグ取得時までのワープ回数";
+      */
     }
 
     {
