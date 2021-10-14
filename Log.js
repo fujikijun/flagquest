@@ -250,7 +250,7 @@ class Log
     this.output();
 
     this.strLogHeader = "";
-    this.strLogTotal = "";
+    //this.strLogTotal = "";
     this.strLogBody = "";
   }
 
