@@ -560,7 +560,8 @@ class Player
     {
       this.flag_timer = 0;
     }
-
+    
+    /*
     // time
     flog_y += BASE_MAPTIP_SIZE;
     image( this.m_imgTime, flog_x+BASE_MAPTIP_SIZE*9, flog_y+this.m_imgTime.height/2 );
@@ -617,7 +618,7 @@ class Player
         image( this.m_imgNumber[9], flog_x+BASE_MAPTIP_SIZE*9+this.m_imgNumber[0].width*5+this.m_imgNumber[0].width*i, flog_y+this.m_imgTime.height/2 );
         break;
       }
-    }
+    }*/
 
     // time over
     if ( this.play_time < 0 )
@@ -627,5 +628,5 @@ class Player
       log.WriteFish();
       //--------------------------------------------
     }
-  }
+  }  
 }
