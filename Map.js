@@ -1,4 +1,4 @@
-//------------------------------------------------------------------------------------------ //<>// //<>// //<>// //<>// //<>// //<>//
+//------------------------------------------------------------------------------------------
 //
 //          Map
 //
@@ -61,7 +61,7 @@ class Map
     this.imgTip = [];
     for ( let i=0; i<this.TIP_NUM; i++ )
     {
-      this.imgTip[i] = loadImage( "data/"+i+".jpg" );
+      this.imgTip[i] = loadImage( "data/tip"+i+".png" );
     }
     this.imgMap = loadImage( mapFileName );
     this.m_imgGoal = loadImage( "data/goal.png" );
