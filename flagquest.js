@@ -265,6 +265,7 @@ function draw()
 
 function windowResized() 
 { 
+/*
   let userAgent = window.navigator.userAgent.toLowerCase();
   if (userAgent.indexOf('iphone') != -1) {
     smafo = true;
@@ -295,9 +296,10 @@ function windowResized()
   }
   canvas.style('top', '0');
   canvas.style('left', '0');
+*/
+  resizeCanvas( windowWidth, windowHeight );
 
   noSmooth();
-
   frameRate( 30 );
 }
 
