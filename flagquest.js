@@ -36,6 +36,7 @@ let g_Minim;
 let g_soundBGM;
 let g_soundGet;
 let g_soundGoal;
+let g_soundNone;
 
 let g_map;
 let g_player;
@@ -68,11 +69,11 @@ function beforeUnload(event)
 {
   /*
   //--------------------------------------------
-  log.WriteFish();
-  //--------------------------------------------
-  event.preventDefault();
-  event.returnValue = 'Check';
-  */
+   log.WriteFish();
+   //--------------------------------------------
+   event.preventDefault();
+   event.returnValue = 'Check';
+   */
 }
 
 window.onbeforeunload = beforeUnload;
@@ -94,6 +95,7 @@ function preload()
   g_soundGet = loadSound( 'data/get.mp3' );
   g_soundGoal = loadSound( 'data/goal.mp3' );
   g_soundBGM = loadSound( 'data/bgm.wav' );
+  g_sndNone = loadSound( 'data/none.wav' );
 
   g_player = new Player();
   g_player.setup();
@@ -265,38 +267,38 @@ function draw()
 
 function windowResized() 
 { 
-/*
+  /*
   let userAgent = window.navigator.userAgent.toLowerCase();
-  if (userAgent.indexOf('iphone') != -1) {
-    smafo = true;
-  } else if (userAgent.indexOf('ipad') != -1) {
-    smafo = true;
-  } else if (userAgent.indexOf('android') != -1) {
-    if (userAgent.indexOf('mobile') != -1) {
-      smafo = true;
-    } else {
-      smafo = true;
-    }
-  }
-
-  if ( smafo == true )
-  {
-    if ( canvas != null )
-    {
-      canvas.style('position', 'fixed');
-    }
-    return;
-  }
-
-  canvas = createCanvas( windowWidth, windowHeight );
-  canvas.style('z-index', '-1');
-  if ( smafo == false )
-  {
-    canvas.style('position', 'fixed');
-  }
-  canvas.style('top', '0');
-  canvas.style('left', '0');
-*/
+   if (userAgent.indexOf('iphone') != -1) {
+   smafo = true;
+   } else if (userAgent.indexOf('ipad') != -1) {
+   smafo = true;
+   } else if (userAgent.indexOf('android') != -1) {
+   if (userAgent.indexOf('mobile') != -1) {
+   smafo = true;
+   } else {
+   smafo = true;
+   }
+   }
+   
+   if ( smafo == true )
+   {
+   if ( canvas != null )
+   {
+   canvas.style('position', 'fixed');
+   }
+   return;
+   }
+   
+   canvas = createCanvas( windowWidth, windowHeight );
+   canvas.style('z-index', '-1');
+   if ( smafo == false )
+   {
+   canvas.style('position', 'fixed');
+   }
+   canvas.style('top', '0');
+   canvas.style('left', '0');
+   */
   resizeCanvas( windowWidth, windowHeight );
 
   noSmooth();
@@ -453,6 +455,8 @@ function changeMask( index, type, upside )
 
 function mousePressed()
 {
+  g_sndNone.play();
+
   for ( let i=0; i<mask.length; i++ )
   {
     mask[i].action( mouseX, mouseY );
